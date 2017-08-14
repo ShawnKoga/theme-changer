@@ -9,26 +9,62 @@ import TextContainer from './components/TextContainer';
 
 class App extends Component {
   // constructor
+  constructor() {
+    super();
 
-  // updateColor
+    this.state = {
+      fontColor: "black",
+      fontSize: 12,
+      fontFamily: "Arial",
+      allowEdit: true
+    }
 
-  // updateSize
+    this.updateColor = this.updateColor.bind(this)
+    this.updateSize = this.updateSize.bind(this)
+    this.updateFamily = this.updateFamily.bind(this)
+    this.updateEditStatus = this.updateEditStatus.bind(this)
+  }
 
-  // updateFamily
+  updateColor(col) {
+    this.setState({
+      fontColor: col
+    })
+  }
 
-  // updateEditStatus
+  updateSize(sz) {
+    this.setState({
+      fontSize: sz
+    })
+  }
+
+  updateFamily(fam) {
+    this.setState({
+      fontFamily: fam
+    })
+  }
+
+  updateEditStatus(val) {
+    this.setState({
+      allowEdit: val
+    })
+  }
 
   render() {
     return (
       <div>
         <div className="headerBar">
-          { /* Render EditToggle */ }
-          { /* Render ColorChanger */ }
-          { /* Render SizeChanger */ }
-          { /* Render FamilyChanger */ }
+          <EditToggle update={this.updateEditStatus} />
+          <ColorChanger update={this.updateColor}
+            allowEdit={this.state.allowEdit} />
+          <SizeChanger update={this.updateSize}
+            allowEdit={this.state.allowEdit} />
+          <FamilyChanger update={this.updateFamily}
+            allowEdit={this.state.allowEdit} />
         </div>
         <div className="textArea">
-          { /* Render TextContainer */ }
+          <TextContainer fontSize={this.state.fontSize}
+          fontColor={this.state.fontColor}
+          fontFamily={this.state.fontFamily} />
         </div>
       </div>
     )
